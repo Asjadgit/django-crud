@@ -18,5 +18,6 @@ A simple, lightweight **User Management system** built using Django's built-in U
 - [x] Project Initialization & Structure
 - [x] Basic Git Workflow & Version Control
 - [x] Basic CRUD Operations
+- [X] Basic CI/CD
 - [ ] Built-in User Authentication & Access Restrictions
 - [ ] Query Pagination for large data sets
