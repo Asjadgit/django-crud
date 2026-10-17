@@ -56,7 +56,7 @@ ROOT_URLCONF = 'crud_operation.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -116,7 +116,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.1/howto/static-files/
 
+# 1. The URL prefix used to access static files in the browser
 STATIC_URL = 'static/'
+
+# 2. Additional places where Django will look for static files (Development)
+STATICFILES_DIRS = [
+    BASE_DIR / "static", 
+]
 
 
 # Email
