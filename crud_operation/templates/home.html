@@ -1,155 +1,124 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee Management System</title>
+{% extends "base.html" %} 
+ {% block content %}
+    <!-- Hero Section -->
+    <div>
+    <section class="mx-auto flex min-h-[75vh] max-w-7xl items-center px-6 py-20">
+        <div class="max-w-3xl">
+        <span
+            class="inline-block rounded-full bg-indigo-100 px-4 py-2 text-sm font-semibold text-indigo-700"
+        >
+            Employee Management System
+        </span>
 
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/output.css' %}">
-</head>
+        <h1
+            class="mt-6 text-4xl font-extrabold leading-tight tracking-tight text-slate-900 sm:text-5xl lg:text-6xl"
+        >
+            Welcome to Your
+            <span class="text-indigo-600">Employee Management System</span>
+        </h1>
 
-<body class="min-h-screen bg-slate-50 text-slate-800">
+        <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
+            Manage employees, organize departments, and keep your workforce
+            information in one place with a simple and efficient system.
+        </p>
 
-    <!-- Navbar -->
-    <nav class="border-b border-slate-200 bg-white">
-        <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-            <a href="/" class="text-xl font-bold text-indigo-600">
-                EMS
+        <div class="mt-8 flex flex-wrap gap-4">
+            <a
+            href="#features"
+            class="rounded-lg bg-indigo-600 px-6 py-3 font-semibold text-white shadow-sm transition hover:bg-indigo-700"
+            >
+            Explore Features
             </a>
 
-            <div class="flex items-center gap-6">
-                <a href="/" class="text-sm font-medium text-slate-600 hover:text-indigo-600">
-                    Home
-                </a>
+            <a
+            href="#about"
+            class="rounded-lg border border-slate-300 bg-white px-6 py-3 font-semibold text-slate-700 transition hover:bg-slate-100"
+            >
+            Learn More
+            </a>
+        </div>
 
-                <a href="#features" class="text-sm font-medium text-slate-600 hover:text-indigo-600">
-                    Features
-                </a>
+        <div
+            class="mt-12 grid max-w-xl grid-cols-2 gap-6 border-t border-slate-200 pt-6"
+        >
+            <div>
+            <p class="text-2xl font-bold text-slate-900">Employees</p>
+            <p class="mt-1 text-sm text-slate-500">Manage employee records</p>
+            </div>
 
-                <a href="#about" class="text-sm font-medium text-slate-600 hover:text-indigo-600">
-                    About
-                </a>
+            <div>
+            <p class="text-2xl font-bold text-slate-900">Departments</p>
+            <p class="mt-1 text-sm text-slate-500">Organize your workforce</p>
             </div>
         </div>
-    </nav>
+        </div>
+    </section>
 
-    <!-- Hero Section -->
-    <main>
-        <section class="mx-auto flex min-h-[75vh] max-w-7xl items-center px-6 py-20">
-            <div class="max-w-3xl">
+    <!-- Features Section -->
+    <section id="features" class="bg-white py-20">
+        <div class="mx-auto max-w-7xl px-6">
+        <div class="text-center">
+            <h2 class="text-3xl font-bold tracking-tight text-slate-900">
+            Everything in One Place
+            </h2>
 
-                <span class="inline-block rounded-full bg-indigo-100 px-4 py-2 text-sm font-semibold text-indigo-700">
-                    Employee Management System
-                </span>
+            <p class="mt-4 text-slate-600">
+            Simple tools to help you manage your workforce.
+            </p>
+        </div>
 
-                <h1 class="mt-6 text-4xl font-extrabold leading-tight tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
-                    Welcome to Your
-                    <span class="text-indigo-600">Employee Management System</span>
-                </h1>
-
-                <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
-                    Manage employees, organize departments, and keep your workforce
-                    information in one place with a simple and efficient system.
-                </p>
-
-                <div class="mt-8 flex flex-wrap gap-4">
-                    <a href="#features"
-                       class="rounded-lg bg-indigo-600 px-6 py-3 font-semibold text-white shadow-sm transition hover:bg-indigo-700">
-                        Explore Features
-                    </a>
-
-                    <a href="#about"
-                       class="rounded-lg border border-slate-300 bg-white px-6 py-3 font-semibold text-slate-700 transition hover:bg-slate-100">
-                        Learn More
-                    </a>
-                </div>
-
-                <div class="mt-12 grid max-w-xl grid-cols-2 gap-6 border-t border-slate-200 pt-6">
-                    <div>
-                        <p class="text-2xl font-bold text-slate-900">Employees</p>
-                        <p class="mt-1 text-sm text-slate-500">Manage employee records</p>
-                    </div>
-
-                    <div>
-                        <p class="text-2xl font-bold text-slate-900">Departments</p>
-                        <p class="mt-1 text-sm text-slate-500">Organize your workforce</p>
-                    </div>
-                </div>
-
+        <div class="mt-12 grid gap-8 md:grid-cols-2">
+            <div
+            class="rounded-2xl border border-slate-200 p-8 transition hover:-translate-y-1 hover:shadow-lg"
+            >
+            <div
+                class="flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-100 text-2xl"
+            >
+                👥
             </div>
-        </section>
 
-        <!-- Features Section -->
-        <section id="features" class="bg-white py-20">
-            <div class="mx-auto max-w-7xl px-6">
-                <div class="text-center">
-                    <h2 class="text-3xl font-bold tracking-tight text-slate-900">
-                        Everything in One Place
-                    </h2>
+            <h3 class="mt-5 text-xl font-bold text-slate-900">
+                Employee Management
+            </h3>
 
-                    <p class="mt-4 text-slate-600">
-                        Simple tools to help you manage your workforce.
-                    </p>
-                </div>
-
-                <div class="mt-12 grid gap-8 md:grid-cols-2">
-
-                    <div class="rounded-2xl border border-slate-200 p-8 transition hover:-translate-y-1 hover:shadow-lg">
-                        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-100 text-2xl">
-                            👥
-                        </div>
-
-                        <h3 class="mt-5 text-xl font-bold text-slate-900">
-                            Employee Management
-                        </h3>
-
-                        <p class="mt-3 leading-7 text-slate-600">
-                            Create, view, update, and delete employee records
-                            from a centralized system.
-                        </p>
-                    </div>
-
-                    <div class="rounded-2xl border border-slate-200 p-8 transition hover:-translate-y-1 hover:shadow-lg">
-                        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-100 text-2xl">
-                            🏢
-                        </div>
-
-                        <h3 class="mt-5 text-xl font-bold text-slate-900">
-                            Department Management
-                        </h3>
-
-                        <p class="mt-3 leading-7 text-slate-600">
-                            Organize employees by department and keep
-                            department information structured.
-                        </p>
-                    </div>
-
-                </div>
+            <p class="mt-3 leading-7 text-slate-600">
+                Create, view, update, and delete employee records from a centralized
+                system.
+            </p>
             </div>
-        </section>
 
-        <!-- About Section -->
-        <section id="about" class="bg-slate-50 py-16">
-            <div class="mx-auto max-w-3xl px-6 text-center">
-                <h2 class="text-2xl font-bold text-slate-900">
-                    Built for Simplicity
-                </h2>
-
-                <p class="mt-4 leading-7 text-slate-600">
-                    This project is built with Django and Tailwind CSS to provide
-                    a clean interface for managing employee and department data.
-                </p>
+            <div
+            class="rounded-2xl border border-slate-200 p-8 transition hover:-translate-y-1 hover:shadow-lg"
+            >
+            <div
+                class="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-100 text-2xl"
+            >
+                🏢
             </div>
-        </section>
-    </main>
 
-    <!-- Footer -->
-    <footer class="border-t border-slate-200 bg-white py-6">
-        <p class="text-center text-sm text-slate-500">
-            © 2026 Employee Management System. All rights reserved.
+            <h3 class="mt-5 text-xl font-bold text-slate-900">
+                Department Management
+            </h3>
+
+            <p class="mt-3 leading-7 text-slate-600">
+                Organize employees by department and keep department information
+                structured.
+            </p>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="bg-slate-50 py-16">
+        <div class="mx-auto max-w-3xl px-6 text-center">
+        <h2 class="text-2xl font-bold text-slate-900">Built for Simplicity</h2>
+
+        <p class="mt-4 leading-7 text-slate-600">
+            This project is built with Django and Tailwind CSS to provide a clean
+            interface for managing employee and department data.
         </p>
-    </footer>
-
-</body>
-</html>
+        </div>
+    </section>
+    </div>
+ {% endblock content %}

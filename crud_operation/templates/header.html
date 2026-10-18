@@ -1,0 +1,25 @@
+{% with current=request.resolver_match.url_name %}
+<nav class="sticky top-0 z-30 border-b border-slate-200 bg-white/80 backdrop-blur">
+  <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+    <a href="{% url 'home' %}" class="flex items-center gap-2">
+      <span class="grid h-9 w-9 place-items-center rounded-lg bg-indigo-600 text-sm font-bold text-white shadow-sm">E</span>
+      <span class="text-lg font-bold tracking-tight text-slate-900">EMS</span>
+    </a>
+
+    <div class="flex items-center gap-1 sm:gap-2">
+      <a href="{% url 'home' %}"
+         class="rounded-lg px-3 py-2 text-sm font-medium transition {% if current == 'home' %}bg-indigo-50 text-indigo-700{% else %}text-slate-600 hover:bg-slate-100 hover:text-slate-900{% endif %}">
+        Home
+      </a>
+      <a href="{% url 'employees' %}"
+         class="rounded-lg px-3 py-2 text-sm font-medium transition {% if current == 'employees' %}bg-indigo-50 text-indigo-700{% else %}text-slate-600 hover:bg-slate-100 hover:text-slate-900{% endif %}">
+        Employees
+      </a>
+      <a href="#"
+         class="ml-1 hidden rounded-lg bg-indigo-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-700 sm:inline-flex">
+        Add Employee
+      </a>
+    </div>
+  </div>
+</nav>
+{% endwith %}

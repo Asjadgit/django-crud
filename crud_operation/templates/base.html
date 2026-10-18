@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Employee Management System{% endblock %}</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/output.css' %}" />
+  </head>
+
+  <body class="flex min-h-screen flex-col bg-slate-50 text-slate-800 antialiased">
+    {% include "header.html" %}
+
+    <main class="flex-1">
+      {% block content %}{% endblock %}
+    </main>
+
+    {% include "footer.html" %}
+  </body>
+</html>

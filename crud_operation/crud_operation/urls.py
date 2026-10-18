@@ -20,5 +20,6 @@ from crud_operation import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.homePage, name="home")
+    path('', views.homePage, name="home"),
+    path('employees', views.indexPage, name="employees")
 ]
