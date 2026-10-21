@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from employee.models import Employee
 from department.models import Department
+from department.forms import DepartmentForm
 
 
 def homePage(request):
@@ -16,3 +17,22 @@ def indexPage(request):
         "employees": employees,
         "department_count": Department.objects.count(),
     })
+
+def departmentPage(request):
+    departments = Department.objects.all()
+
+    return render(
+        request,
+        'department/index.html',
+        {'departments': departments}
+    )
+
+def adddepartmentPage(request):
+
+    form = DepartmentForm()
+
+    return render(
+        request,
+        'department/index.html',
+        {'form': form}
+    )

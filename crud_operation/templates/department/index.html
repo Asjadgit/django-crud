@@ -1,0 +1,53 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="mx-auto max-w-5xl px-4 py-10">
+
+    <div class="mb-6">
+        <h1 class="text-2xl font-bold text-gray-900">
+            Departments
+        </h1>
+        <p class="mt-1 text-sm text-gray-500">
+            View all departments in your organization.
+        </p>
+    </div>
+
+    <div class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+        <table class="w-full text-left text-sm">
+
+            <thead class="bg-gray-50 text-gray-600">
+                <tr>
+                    <th class="px-6 py-4 font-semibold">ID</th>
+                    <th class="px-6 py-4 font-semibold">Department Name</th>
+                </tr>
+            </thead>
+
+            <tbody class="divide-y divide-gray-100">
+
+                {% for department in departments %}
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-6 py-4 text-gray-500">
+                            {{ department.id }}
+                        </td>
+                        <td class="px-6 py-4 font-medium text-gray-900">
+                            {{ department.department_name }}
+                        </td>
+                    </tr>
+
+                {% empty %}
+                    <tr>
+                        <td colspan="2" class="px-6 py-10 text-center text-gray-500">
+                            No departments found.
+                        </td>
+                    </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+{% endblock content %}

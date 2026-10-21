@@ -21,5 +21,6 @@ from crud_operation import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.homePage, name="home"),
-    path('employees', views.indexPage, name="employees")
+    path('employees', views.indexPage, name="employees"),
+    path('departemnts', views.departmentPage, name="departemnt")
 ]
