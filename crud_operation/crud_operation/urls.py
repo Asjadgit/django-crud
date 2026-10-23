@@ -17,10 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from crud_operation import views
+from department.views import department_page, save_department
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.homePage, name="home"),
     path('employees', views.indexPage, name="employees"),
-    path('departemnts', views.departmentPage, name="departemnt")
+    path('departments/', department_page, name="departments"),
+    path('departments/add/', save_department, name="department_add"),
 ]

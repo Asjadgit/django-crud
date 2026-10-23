@@ -17,22 +17,3 @@ def indexPage(request):
         "employees": employees,
         "department_count": Department.objects.count(),
     })
-
-def departmentPage(request):
-    departments = Department.objects.all()
-
-    return render(
-        request,
-        'department/index.html',
-        {'departments': departments}
-    )
-
-def adddepartmentPage(request):
-
-    form = DepartmentForm()
-
-    return render(
-        request,
-        'department/index.html',
-        {'form': form}
-    )
