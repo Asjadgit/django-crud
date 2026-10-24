@@ -1,53 +1,161 @@
-
-{% extends "base.html" %}
-
-{% block content %}
+{% extends "base.html" %} {% block content %}
 
 <div class="mx-auto max-w-5xl px-4 py-10">
+  {% for message in messages %}
+  <div class="mb-4 rounded-lg bg-emerald-50 px-4 py-3 text-sm text-emerald-700">
+    {{ message }}
+  </div>
+  {% endfor %}
 
-    <div class="mb-6">
-        <h1 class="text-2xl font-bold text-gray-900">
-            Departments
-        </h1>
-        <p class="mt-1 text-sm text-gray-500">
-            View all departments in your organization.
-        </p>
+  <div class="mb-6 flex items-end justify-between">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-900">Departments</h1>
+      <p class="mt-1 text-sm text-gray-500">
+        View all departments in your organization.
+      </p>
     </div>
 
-    <div class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
-        <table class="w-full text-left text-sm">
+    <button
+      type="button"
+      data-open-department
+      data-action="{% url 'department_add' %}"
+      data-title="Add department"
+      class="rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700"
+    >
+      + Add Department
+    </button>
+  </div>
 
-            <thead class="bg-gray-50 text-gray-600">
-                <tr>
-                    <th class="px-6 py-4 font-semibold">ID</th>
-                    <th class="px-6 py-4 font-semibold">Department Name</th>
-                </tr>
-            </thead>
+  <div
+    class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm"
+  >
+    <table class="w-full text-left text-sm">
+      <thead class="bg-gray-50 text-gray-600">
+        <tr>
+          <th class="px-6 py-4 font-semibold">ID</th>
+          <th class="px-6 py-4 font-semibold">Department Name</th>
+        </tr>
+      </thead>
 
-            <tbody class="divide-y divide-gray-100">
+      <tbody class="divide-y divide-gray-100">
+        {% for department in departments %}
+        <tr class="hover:bg-gray-50">
+          <td class="px-6 py-4 text-gray-500">{{ department.id }}</td>
+          <td class="px-6 py-4 font-medium text-gray-900">
+            {{ department.department_name }}
+          </td>
+        </tr>
 
-                {% for department in departments %}
-                    <tr class="hover:bg-gray-50">
-                        <td class="px-6 py-4 text-gray-500">
-                            {{ department.id }}
-                        </td>
-                        <td class="px-6 py-4 font-medium text-gray-900">
-                            {{ department.department_name }}
-                        </td>
-                    </tr>
-
-                {% empty %}
-                    <tr>
-                        <td colspan="2" class="px-6 py-10 text-center text-gray-500">
-                            No departments found.
-                        </td>
-                    </tr>
-                {% endfor %}
-
-            </tbody>
-        </table>
-    </div>
-
+        {% empty %}
+        <tr>
+          <td colspan="2" class="px-6 py-10 text-center text-gray-500">
+            No departments found.
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </div>
+
+<dialog
+  id="department-modal"
+  class="m-auto w-full max-w-md rounded-xl p-0 shadow-xl backdrop:bg-slate-900/50"
+>
+  <form id="department-form" method="post" class="p-6">
+    {% csrf_token %}
+
+    <h2
+      id="department-modal-title"
+      class="mb-4 text-lg font-semibold text-slate-900"
+    >
+      Add department
+    </h2>
+
+    <label
+      for="{{ form.department_name.id_for_label }}"
+      class="mb-1 block text-sm font-medium text-slate-700"
+    >
+      {{ form.department_name.label }}
+    </label>
+    {{ form.department_name }}
+    <p id="department-error" class="mt-1 hidden text-sm text-red-600"></p>
+
+    <div class="mt-6 flex justify-end gap-2">
+      <button
+        type="button"
+        data-close-department
+        class="rounded-lg px-4 py-2 text-sm text-slate-600 hover:bg-slate-100"
+      >
+        Cancel
+      </button>
+      <button
+        type="submit"
+        id="department-submit"
+        class="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-700 disabled:opacity-60"
+      >
+        Save
+      </button>
+    </div>
+  </form>
+</dialog>
+
+<script>
+
+  // 1. Find the elements
+  const modal  = document.getElementById("department-modal");
+  const form   = document.getElementById("department-form");
+  const title  = document.getElementById("department-modal-title");
+  const input  = form.querySelector("[name=department_name]");
+  const error  = document.getElementById("department-error");
+  const submit = document.getElementById("department-submit");
+
+  // 2. Show or hide the error line
+  function showError(text) {
+    error.textContent = text || "";
+    error.classList.toggle("hidden", !text);
+  }
+
+  // 3. Show the Modal
+  document.querySelectorAll("[data-open-department]").forEach((button) => {
+      button.addEventListener("click", () => {
+          title.textContent = button.dataset.title;
+          form.action       = button.dataset.action;
+          modal.showModal();
+          input.focus();
+      })
+  });
+
+  // 4. Close the Modal
+  document.querySelectorAll("[data-close-department]").forEach((button) => {
+      button.addEventListener("click", () => {
+          modal.close();
+      })
+  })
+
+  // 5. Send the form in the background instead of a normal submit
+  form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      submit.disbaled = true;
+      showError("");
+
+      try{
+          const res  = await fetch(form.action, {method: "POST", body: new FormData(form)});
+          const data = await res.json();
+
+          if (data.ok) {
+             window.location.reload();
+             return;
+          }
+
+          const errors = data.errors.department_name || data.errors.__all__ || ["Something went wrong."];
+          showError(errors[0]);
+      } catch(err){
+        showError("Could not save. Please try again.")
+      } finally {
+        submit.disbaled = false;
+      }
+    })
+</script>
 
 {% endblock content %}
