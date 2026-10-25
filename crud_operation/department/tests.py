@@ -41,3 +41,14 @@ class DepartmentPageTest(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json(), {"ok": True})
+
+class DeartmentEditPageTest(TestCase):
+    def test_edit_Updates_department(self):
+        department = Department.objects.create(department_name="Finance")
+
+        url = reverse("department_edit", args=[department.pk])
+        response = self.client.post(url, {"department_name": "Accounts"})
+
+        self.assertEqual(response.status_code, 200)
+        department.refresh_from_db()
+        self.assertEqual(department.department_name, "Accounts")

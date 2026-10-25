@@ -25,3 +25,7 @@ def save_department(request, pk=None):
         return JsonResponse({"ok": True})
 
     return JsonResponse({"ok": False, "errors": form.errors}, status=400)
+
+def delete_department(request, pk):
+    # TODO: implement delete
+    pass

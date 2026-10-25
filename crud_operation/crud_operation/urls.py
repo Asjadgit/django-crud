@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from crud_operation import views
-from department.views import department_page, save_department
+from department.views import department_page, save_department, delete_department
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +25,6 @@ urlpatterns = [
     path('employees', views.indexPage, name="employees"),
     path('departments/', department_page, name="departments"),
     path('departments/add/', save_department, name="department_add"),
+    path('departments/<int:pk>/edit/', save_department, name="department_edit"),
+    path('departments/<int:pk>/delete/', delete_department, name="department_delete"),
 ]
