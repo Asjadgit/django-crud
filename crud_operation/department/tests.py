@@ -52,3 +52,15 @@ class DeartmentEditPageTest(TestCase):
         self.assertEqual(response.status_code, 200)
         department.refresh_from_db()
         self.assertEqual(department.department_name, "Accounts")
+
+
+class DeartmentDeletePageTest(TestCase):
+    def test_delete_department(self):
+        department = Department.objects.create(department_name="Finance")
+
+        url = reverse("department_delete", args=[department.pk])
+        response = self.client.post(url,)
+
+        self.assertEqual(response.status_code, 200)
+    
+        self.assertFalse(Department.objects.filter(pk=department.pk).exists())

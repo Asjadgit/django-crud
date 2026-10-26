@@ -26,6 +26,9 @@ def save_department(request, pk=None):
 
     return JsonResponse({"ok": False, "errors": form.errors}, status=400)
 
+@require_POST
 def delete_department(request, pk):
-    # TODO: implement delete
-    pass
+    department = get_object_or_404(Department, pk=pk)
+    department.delete();
+    messages.success(request, "Department Deleted.")
+    return JsonResponse({"ok": True})

@@ -59,6 +59,7 @@
             </button>
             <button
               type="button"
+              data-delete-department
               data-action="{% url 'department_delete' department.pk %}"
               class="rounded-lg px-3 py-1.5 text-sm font-medium text-red-600 hover:bg-red-50"
             >
@@ -155,8 +156,27 @@
       })
   })
 
+   //6 Delete the department
+    document.querySelectorAll("[data-delete-department]").forEach((button) => {
+        button.addEventListener("click", async () => {
+            if(!confirm("Do you really want to delete this record?"))
+    return;
+
+            const res = await fetch(button.dataset.action, {
+                "method": "POST",
+                body: new FormData(form),
+            })
+
+            if(res.ok){
+                window.location.reload()
+            }else{
+                alert("Something happens! unabel to delete")
+            }
+        })
+    })
+
   // 5. Send the form in the background instead of a normal submit
-  form.addEventListener('submit', async (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       submit.disbaled = true;
       showError("");
@@ -178,6 +198,7 @@
         submit.disbaled = false;
       }
     })
+
 </script>
 
 {% endblock content %}
