@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}Add Employee · EMS{% endblock %}
+
+{% block content %}
+
+<div class="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
+
+    <!-- Page Header -->
+    <div>
+        <nav class="mb-2 text-sm text-slate-500">
+            <a href="{% url 'home' %}" class="hover:text-indigo-600">Home</a>
+            <span class="mx-1.5 text-slate-300">/</span>
+            <a href="{% url 'employees' %}" class="hover:text-indigo-600">Employees</a>
+            <span class="mx-1.5 text-slate-300">/</span>
+            <span class="text-slate-700">Add</span>
+        </nav>
+        <h1 class="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">Add Employee</h1>
+        <p class="mt-1 text-sm text-slate-600">Fill in the details below to create a new employee record.</p>
+    </div>
+
+    <!-- Form card -->
+    <form method="post" action="{% url 'employees_create' %}" novalidate
+          class="mt-8 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+        <div class="border-b border-red-200 bg-red-50 px-6 py-4 text-sm text-red-700">
+            {% for error in form.non_field_errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Personal details -->
+        <div class="px-6 py-6">
+            <div class="flex items-center gap-3">
+                <div class="grid h-9 w-9 place-items-center rounded-lg bg-indigo-50 text-indigo-600">
+                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                    </svg>
+                </div>
+                <div>
+                    <h2 class="text-base font-semibold text-slate-900">Personal details</h2>
+                    <p class="text-sm text-slate-500">Basic information about the employee.</p>
+                </div>
+            </div>
+
+            <div class="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2">
+                {% include "employees/_field.html" with field=form.employee_name full=True %}
+                {% include "employees/_field.html" with field=form.employee_age %}
+            </div>
+        </div>
+
+        <!-- Contact details -->
+        <div class="border-t border-slate-200 px-6 py-6">
+            <div class="flex items-center gap-3">
+                <div class="grid h-9 w-9 place-items-center rounded-lg bg-emerald-50 text-emerald-600">
+                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                    </svg>
+                </div>
+                <div>
+                    <h2 class="text-base font-semibold text-slate-900">Contact &amp; department</h2>
+                    <p class="text-sm text-slate-500">How to reach them and where they work.</p>
+                </div>
+            </div>
+
+            <div class="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2">
+                {% include "employees/_field.html" with field=form.employee_email %}
+                {% include "employees/_field.html" with field=form.employee_phone %}
+                {% include "employees/_field.html" with field=form.employee_depart full=True %}
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex flex-col-reverse gap-3 border-t border-slate-200 bg-slate-50 px-6 py-4 sm:flex-row sm:justify-end">
+            <a href="{% url 'employees' %}"
+               class="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2">
+                Cancel
+            </a>
+            <button type="submit"
+                    class="inline-flex items-center justify-center gap-2 rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2">
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                </svg>
+                Save Employee
+            </button>
+        </div>
+    </form>
+</div>
+
+{% endblock content %}

@@ -8,12 +8,3 @@ from department.forms import DepartmentForm
 def homePage(request):
     # return HttpResponse("Welcome to Employee Management Service!")
     return render(request, "home.html")
-
-def indexPage(request):
-
-    employees = Employee.objects.select_related("employee_depart").order_by("employee_name")
-
-    return render(request, "employees/index.html", {
-        "employees": employees,
-        "department_count": Department.objects.count(),
-    })

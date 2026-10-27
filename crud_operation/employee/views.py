@@ -1,3 +1,22 @@
 from django.shortcuts import render
+from django.http import JsonResponse
+from django.contrib import messages
+from django.shortcuts import get_object_or_404
+from django.views.decorators.http import require_POST
 
 # Create your views here.
+from .models import Employee
+from .forms import EmployeeForm
+from department.models import Department
+
+def indexPage(request):
+
+    employees = Employee.objects.select_related("employee_depart").order_by("employee_name")
+
+    return render(request, "employees/index.html", {
+        "employees": employees,
+        "department_count": Department.objects.count(),
+    })
+
+def createPage(request):
+    return render(request, "employees/create.html", {"form" : EmployeeForm()})

@@ -1,0 +1,20 @@
+<div class="{% if full %}sm:col-span-2{% endif %}">
+    <label for="{{ field.id_for_label }}" class="mb-1.5 block text-sm font-medium text-slate-700">
+        {{ field.label }}{% if field.field.required %} <span class="text-red-500">*</span>{% endif %}
+    </label>
+
+    {{ field }}
+
+    {% if field.errors %}
+        {% for error in field.errors %}
+        <p class="mt-1.5 flex items-center gap-1 text-sm text-red-600">
+            <svg class="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+            </svg>
+            {{ error }}
+        </p>
+        {% endfor %}
+    {% elif field.help_text %}
+        <p class="mt-1.5 text-sm text-slate-500">{{ field.help_text }}</p>
+    {% endif %}
+</div>

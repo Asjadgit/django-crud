@@ -19,7 +19,7 @@
          class="rounded-lg px-3 py-2 text-sm font-medium transition {% if current == 'employees' %}bg-indigo-50 text-indigo-700{% else %}text-slate-600 hover:bg-slate-100 hover:text-slate-900{% endif %}">
         Employees
       </a>
-      <a href="#"
+      <a href="{% url 'employees_create' %}"
          class="ml-1 hidden rounded-lg bg-indigo-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-700 sm:inline-flex">
         Add Employee
       </a>
