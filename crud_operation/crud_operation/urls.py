@@ -18,13 +18,14 @@ from django.contrib import admin
 from django.urls import path
 from crud_operation import views
 from department.views import department_page, save_department, delete_department
-from employee.views import indexPage, createPage
+from employee.views import indexPage, createPage, storeEmployee
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.homePage, name="home"),
     path('employees', indexPage, name="employees"),
     path('employees/create', createPage, name="employees_create"),
+    path('employees/store', storeEmployee, name="employees_store"),
     path('departments/', department_page, name="departments"),
     path('departments/add/', save_department, name="department_add"),
     path('departments/<int:pk>/edit/', save_department, name="department_edit"),

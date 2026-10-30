@@ -18,7 +18,7 @@
             <p class="mt-1 text-sm text-slate-600">Manage and view all employee records.</p>
         </div>
 
-        <a href="#"
+        <a href="{% url 'employees_create' %}"
            class="inline-flex items-center justify-center gap-2 self-start rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 sm:self-auto">
             <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -72,6 +72,11 @@
             </p>
         </div>
 
+        {% for message in messages %}
+        <div class="mb-4 rounded-lg bg-emerald-50 px-4 py-3 text-sm text-emerald-700">
+            {{ message }}
+        </div>
+        {% endfor %}
         <!-- Table (md and up) -->
         <div class="hidden overflow-x-auto md:block">
             <table class="w-full text-left text-sm">
@@ -155,7 +160,7 @@
             <p class="mt-1 max-w-sm text-sm text-slate-500">
                 Get started by adding your first employee. Their details will appear here.
             </p>
-            <a href="#"
+            <a href="{% url 'employees_create' %}"
                class="mt-6 inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-700">
                 <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
